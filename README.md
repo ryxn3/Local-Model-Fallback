@@ -96,11 +96,32 @@ Edit `local-model-fallback/SKILL.md`:
 - **Model not detected:** make sure the runner is started (`ollama serve`) and the port matches.
 - **Garbled JSON from curl:** build the payload with `jq -n --arg p "$PROMPT" ...` so quotes are escaped.
 
+## Second skill: explain-refusals
+
+When Claude declines or only partly helps, this skill replaces a vague "I can't help with that" with a clear answer: what it can't do, the real reason (safety, practical limit, ambiguity, capability), what it can do instead, and a next step. If the cause is practical, it also offers `local-model-fallback`. If the cause is safety or policy, it does not suggest routing the request to another model.
+
+Install it the same way as the first skill, copying the `explain-refusals` folder:
+
+```bash
+cp -r claude-skill/explain-refusals ~/.claude/skills/
+```
+
+Or paste into Claude Code:
+
+```
+Install the "explain-refusals" skill from https://github.com/ryxn3/claude-skill.
+Clone the repo to a temporary folder, copy the explain-refusals/ directory into
+~/.claude/skills/ so that ~/.claude/skills/explain-refusals/SKILL.md exists, then
+delete the temporary clone and confirm.
+```
+
 ## Repo layout
 
 ```
 .
 ├── README.md
-└── local-model-fallback/
+├── local-model-fallback/
+│   └── SKILL.md
+└── explain-refusals/
     └── SKILL.md
 ```
